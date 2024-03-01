@@ -1,0 +1,43 @@
+== Lösungsstrategie
+
+== Wie funktioniert die Lösung?
+
+Beim Einloggen wird erkannt, welche Rolle der User hat. Dementsprechend fallen die Zugriffsrechte anders aus (siehe Secured
+Annotationen auf Webpage.java).
+Organisatoren erstellen eine Uebung, wobei sie den Uebungsnamen, Start- und Enddatum, die maximale/minimale Groesse
+einer Uebungsgruppe und die Art der Anmeldung (Gruppen-/Individualanmeldung) festlegen. Zusaetzlich kann der Organisator
+bei der Erstellung der Uebungen die Termine festlegen. Bei der Gruppenanmeldung koennen sich die Studierenden ein Termin
+auswaehlen und sich dafuer anmelden.
+Bei der Anmeldung setzt der Studierende einen Gruppennamen fest und meldet sich und die restlichen Gruppenmitglieder an.
+Dabei wird bei der Anmeldung auf GitHub in der Organisation meister-propra-apitest ein Repository mit dem Gruppennamen als Reponamen
+erstellt. Die angemeldeteten Studierenden werden automatisch in das Repository hinzugefuegt.
+Dabei haben wir darauf geachtet, dass ein/e Studierende/r sich nicht fuer mehrere Termine pro Uebung anmelden kann.
+Sobald die Maximalanzahl der Uebungsgruppe fuer ein Termin ueberschritten wird, ist es dem Studierenden nicht mehr moeglich
+weitere Studierende anzumelden.
+Tutoren und Organisatoren koennen dabei sehen, wer in den Gruppen drin ist.
+Außerdem kann der Organisator Studierende von einer Gruppe entfernen oder weitere Gruppenmitglieder hinzufuegen.
+Bei der Individualanmeldung melden sich alle Studierende einzeln an. Am Ende kann der Organisator die Studierenden
+verschiedenen Terminen zuteilen. Dafuer drueckt er auf den Button "Zuteilung". Dabei werden dann auch die Repositories
+auf GitHub erstellt und die jeweiligen Studierenden werden in den jeweiligen Gruppen und Repositories angemeldet.
+Hierbei wird darauf geachtet, dass die Zuteilung der Studierenden der angegebenen Maximal-/Minimalanzahl der Gruppengroessen
+angepasst sind. Auch die Tutorzuteilung bei gleichen Terminen geschieht zufaellig. So kommt es nicht zu dem unerwuenschten Fall,
+dass ein Tutor nie eine Gruppe hat.
+
+
+
+== Was sind die fundamentalen Lösungsansätze?
+
+Wie oben schon erwaehnt, fallen die Zugriffsrechte fuer die jeweiligen Benutzergruppen anders aus. Die HTMLs sind so
+angepasst, dass die z.B. Uebersichtsseite fuer alle Rollen anders aussehen. Dies macht es den jeweiligen Rollen die
+Zugriffsrechte deutlicher. Bei dem Einloggen wird die Rolle des Benutzers erkannt. Durch die Annotationen in der Klasse
+Webpage.java und durch die Klasse WebSecurityConfiguration haben Organisatoren ein Zugriffsrecht auf alle HTMLs und koennen
+somit auch die Sichten der Tutoren und Studierenden sehen.
+Die HTMLs, auf die nur der Organisator zugreifen darf, lassen sich alle unter /orga/... finden.
+Die Tutoren (und Organisatoren) haben ein Zugriffsrecht auf /tutor/..., koennen aber nicht auf /orga/... zugreifen.
+Analog ist es bei den Studierenden. Hier haben die Tutoren und Organisatoren die Moeglichkeit auf alles zuzugreifen,
+worauf auch Studierende Zugriffsrechte haben. Studierende finden nichts unter /orga/... und /tutor/...
+Nachdem die Uebung erstellt ist, kann der Organisator die Termine per CSV-Datei einlesen. Dabei werden die Wochentage
+(abgekuerzt, z.B.: MO), das Datum, die Uhrzeit und der Tutor eingelesen.
+Fuer die Studierendenzuteilung bei der Individualanmeldung, siehe Methode studiZuweisung() in der Klasse IndividualAnmeldung
+(im package Logik).
+Fuer die zufaellige Tutorzuteilung, siehe Methode tutorZuweisung() in der Klasse UebungService.

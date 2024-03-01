@@ -1,0 +1,14 @@
+== Entwurfsentscheidungen
+
+== Zentrale, prägende und wichtige Entscheidungen
+== KlassenEntwurf
+- Keine Klassen für die Tutoren, Studenten und Organisatoren erstellt, da fuer unseren Code nur die Nutzernamen relevant sind
+
+== Nutzerfreundlichkeit für die Administratoren
+- CSV zur Einlesung der Termine mit jeweiligen Tutoren (Tutoren werden zufaellig mit ihren Zeitslots auf die Termine verteilt)
+
+== Datenbanken
+- JDBC statt JPA, da wir mit JDBC mehr vertraut sind.
+- von 5 Tables zu 4 in der Datenbank, da wir keinen Nutzen für die isolierte Speicherung von Studierenden hatten und nur der Nutzername gespeichert wurde.
+
+== und viele kleiner granulare Entscheidungen ...

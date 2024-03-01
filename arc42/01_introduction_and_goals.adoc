@@ -1,0 +1,56 @@
+== Einführung und Ziele
+
+== Aufgabenstellung
+
+Die Aufgabenstellung ergibt sich.
+
+
+
+== Qualitätsziele
+
+- wartbar (!!)
+- sichere Zugriffe und Sicherheit der Daten (auch im Hinblick zu den Wochenblätter)
+- anschauliche und bequeme Benutzeroberfläche
+- Functional Suitability
+- ISO 25010 Norm so gut wie es geht erfüllen
+
+
+
+== Widersprüche in den Qualitätszielen:
+
+- bequem <-> sicher (Login, ...)
+
+
+
+== Gewähltes Architekturmuster:
+
+- Anfangs hatten wir keine wirkliche Struktur in unserem Projekt, daher wurde uns empfohlen, Layered oder Onion Architecture zu verwenden. Entschieden haben wir uns dann für Layered Architecture, da dies weniger an Codeänderungen mit sich bringt.
+Daher passt Layered Architecture am ehesten, aber auch nicht wirklich, da die Packages "githubapi", "authentifizierung" und "logik" auf einer Stufe sind (siehe ArchUnit-Tests).Dennoch haben wir geschafft , dass sich keine Klassen aus verschiedenen Packages gegenseitg aufrufen.
+Orientiert haben wir uns im Aufbau an "mwst_schicht" aus Woche 7.
+
+
+- DDD (Domain Driven Design)
+
+- Entities, Value-Objects, Repositories, Services
+- Entities: "dasselbe", wirkliche Transaktion nur in der Root-Entity, Referenzen und Unterscheidung über Schlüssel (wir haben Benutzernamen genutzt in der Annahme, dass diese eindeutig sind),
+            Root public, Entities in der Regel package private
+- Value-Objects: "das Gleiche", unveränderlich, neue Instanz zur Änderung, hohe Kohäsion, KEINE EIGENE IDENTITÄT (!),
+                 package private wenn möglich, enums public
+- Repositories: dient Verwalten (Speichern, Löschen, ...) von Aggregaten
+                sind immer public
+- Services: Objekt, enthält Logik, dessen Inhalt nicht in Entities oder Value Objects passen (diese sollten keine enthalten, da es Aggregate verändert)
+            public
+
+- Aggregate: Package "uebung" mit Aggregate Root Übung und zugehöriger Übung und Package "student" mit Aggregate "Student". Eigentlich ein Aggregat pro Objekt in der Datenbank, wobei Termin bei der Übung zugehörig ist.
+
+
+
+== Anforderungen am Architekturmuster (+ nichtfunktionale)
+
+- nach Fachlichkeit getrennt (durch die Packages in diesem Fall)
+
+
+
+== Stakeholder
+
+Benutzergruppen: Studenten, Tutoren, Organisatoren

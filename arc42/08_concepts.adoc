@@ -1,0 +1,17 @@
+== Querschnittliche Konzepte und Muster
+
+== Wiederkehrende Muster und Strukturen
+Technischer Code ueberschneidet sich bei beiden Anmeldungsmodi zu einem grossen Teil.
+Die Datenbearbeitung (von Uebungen, Termine und Gruppen) sind nahezu identisch bei beiden Anmeldungsmodi.
+Die UI aehnelt sich zum groessten Teil.
+
+
+== Fachliche Strukturen
+- Verschiedene Sichten (je nach Rolle des Users)
+- UI abhaengig von Anmeldungsmodus und Rolle des Users
+- Siehe Aggregate aus 01_introduction_and_goals.adoc
+
+
+== Querschnittliche, übergreifende Konzepte, Nutzungs- oder Einsatzanleitungen für Technologien (oftmals projekt-/systemübergreifend verwendbar)
+
+TODO fehlt

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text = "${uebung.uebungname}">Gruppenanmeldung</title>
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          rel="stylesheet">
+    <link th:href="@{/static/css/bootstrap.min.css}"
+          href="../static/css/bootstrap.min.css"
+          rel="stylesheet">
+    <style>
+        .container {
+            padding-top: 100px;
+        }
+
+        .col-sm {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" th:if="${uebung.gruppenanmeldung}">
+    <h1 class="siteTitel" th:text="${uebung.uebungname}">Praktische Übung 9</h1>
+    <h2>Termine</h2>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm" th:each="termin : ${uebung.termine}">
+                <h3 th:text="${termin.datum}">12.11.2020</h3>
+                <h4 th:text="${termin.tag}">Montag</h4>
+                <ul>
+                    <li><a th:if="${!termin.terminBelegt}" href="#" th:href="@{/anmeldunggruppe/{uebungId}/{terminId}(uebungId = ${uebung.uebungId},terminId=${termin.terminId})}" th:text="${termin.uhrzeit}">9:00</a></li>
+                    <li><p th:if="${termin.gruppenname != null}"  th:text="${termin.gruppenname}">Gruppenname</p></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:if="${uebung.individualanmeldung}">
+    <h1 class="siteTitel" th:text="${uebung.uebungname}">Praktische Übung 9</h1>
+    <h2>Termine</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm" th:each="individualanmeldung : ${individualanmeldungen}">
+                <h3 th:text="${individualanmeldung.datum}">12.11.2020</h3>
+                <h4 th:text="${individualanmeldung.uhrzeit}">12:50</h4>
+                <ul>
+                    <li><a href="#" th:href="@{/anmeldungindi/{uebungId}/{individualId}(uebungId = ${uebung.uebungId},individualId=${individualanmeldung.individualId})}" th:text="${individualanmeldung.uhrzeit}">9:00</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

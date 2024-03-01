@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Demo</title>
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          rel="stylesheet">
+    <style>
+        button {
+            background: none !important;
+            border: none;
+            padding: 0 !important;
+            /*optional*/
+            font-family: arial, sans-serif;
+            /*input has OS specific font-family*/
+            color: #069;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Authenticate</h1>
+    <p>Login: <span th:text="${user} ?: 'Not logged in'">Not logged in</span></p>
+
+    <a th:if="!${user}" href="/oauth2/authorization/github">Login using GitHub</a></li>
+    <form th:if="${user}" action="/logout" method="post">
+        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+        <button type="submit">Logout</button>
+    </form>
+
+    <a class="btn btn-primary" href="/uebersicht">Zur Hauptseite</a>
+    <h1>Actions</h1>
+    <div>
+        <hr>
+        <a href="/user">show user info</a>
+        <hr>
+        <a href="/tokeninfo">show token info</a>
+        <hr>
+    </div>
+</div>
+</body>
+</html>

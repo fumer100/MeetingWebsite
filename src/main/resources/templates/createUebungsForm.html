@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Uebung Erstellen</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+
+    <form for ="erstellen" action="createuebung" method="post" >
+        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" autocomplete="off" class="form-control" name="uebungname"
+                   th:value="${uebung.uebungname}">
+        </div>
+        <div class="form-group">
+            <label>Startdatum</label>
+            <input type="text" autocomplete="off"
+                   class="form-control" name="startdatum" th:value="${uebung.startDatum}">
+        </div>
+        <div class="form-group">
+            <label>Enddatum</label>
+            <input class="form-control" type="text" autocomplete="off" name="enddatum"
+                   th:value="${uebung.endDatum}">
+        </div>
+        <div class="form-group">
+            <label>MaxAnzahl</label>
+            <input class="form-control" type="text" autocomplete="off" name="max"
+                   th:value="${uebung.maxAnzahl}">
+        </div>
+        <div class="form-group">
+            <label>MinAnzahl</label>
+            <input class="form-control" type="text" autocomplete="off" name="min"
+                   th:value="${uebung.minAnzahl}">
+        </div>
+
+
+        <label>Wähle Anmeldeart:</label>
+
+        <select name="anmeldeart">
+            <option selected th:value="gruppenanmeldung">Gruppenanmeldung</option>
+            <option th:value = "individualanmeldung">Individualanmeldung</option>
+        </select>
+
+
+        <button id="erstellen" type="submit" class="btn btn-primary">Erstellen</button>
+
+        <div class="container" th:if="${uebungen.empty}">
+            <h4>Noch keine Übung erstellt!</h4>
+        </div>
+
+    </form>
+    <div class="container" th:if="${!uebungen.empty}">
+        <h4>Bestehende Übungen :</h4>
+
+        <div class="col-sm" th:each="uebung : ${uebungen}">
+            <h3><a href="#" th:href="@{/tutor/termine/{id}(id = ${uebung.uebungId})}" th:text="${uebung.uebungname}">Name</a></h3>
+            <h4 th:text="${uebung.startDatum}"></h4>
+            <h4 th:text="${uebung.endDatum}"></h4>
+            <div th:if="${uebung.gruppenanmeldung}">
+                <p>Gruppenanmeldung wurde ausgewählt</p>
+            </div>
+            <div th:if="${uebung.individualanmeldung}">
+                <p>Individualanmeldung wurde ausgewählt</p>
+            </div>
+            <form method="POST" th:action="@{/orga/upload-csv-file/{id}(id = ${uebung.uebungId})}" enctype="multipart/form-data">
+                <div class="form-group mt-3">
+                    <label for="file">Select a CSV file</label>
+                    <input type="file" name="file" class="form-control-file" id="file" accept=".csv">
+                </div>
+                <button type="submit" class="btn btn-primary">Termine hochladen</button>
+            </form>
+            <a href="#" th:href="@{/orga/edituebung/{id}(id = ${uebung.uebungId})}"  class="btn btn-primary">Übung bearbeiten</a>
+            <form for="delete" method="post" th:action="@{/orga/deleteuebung/{id}(id = ${uebung.uebungId})}" style="display:inline!important;">
+                <button id="delete" class="delete" type="submit">Übung löschen</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

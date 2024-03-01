@@ -1,0 +1,3 @@
+== Arc42_Template
+
+image::images/arc42_template.png[]

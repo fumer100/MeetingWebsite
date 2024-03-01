@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gruppe bearbeiten</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class = "container">
+    <form method="post" th:action="@{/orga/editgruppe/{uebungId}/{terminId}(uebungId = ${uebung.uebungId},terminId=${termin.terminId})}">
+        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" autocomplete="off" class="form-control" name="gruppenname"
+                   th:value="${termin.gruppenname}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Speichern</button>
+    </form>
+    <form for="delete" method="post" th:action="@{/orga/deletegruppe/{uebungId}/{terminId}(uebungId = ${uebung.uebungId},terminId=${termin.terminId})}" style="display:inline!important;">
+        <button id="delete" class="btn btn-primary" type="submit">Löschen</button>
+    </form>
+    <div class="col-sm" th:each="student : ${termin.gruppe}">
+        <form for="delete" method="post" th:action="@{/orga/deletestudierende/{uebungId}/{terminId}/{student}(uebungId = ${uebung.uebungId},terminId=${termin.terminId}, student=${student})}" style="display:inline!important;">
+            <h4 th:text="${student}"></h4>
+            <button class="btn btn-primary" type="submit">Löschen</button>
+        </form>
+    </div>
+    <div>
+        <form method="post" th:action="@{/orga/addstudierende/{uebungId}/{terminId}(uebungId = ${uebung.uebungId},terminId=${termin.terminId})}" style="display:inline!important;">
+            <input type="text" autocomplete="off" class="form-control" name="studierende"   >
+            <button class="btn btn-primary" type="submit">Einfuegen</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

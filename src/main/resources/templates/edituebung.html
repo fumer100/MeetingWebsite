@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Übung bearbeiten</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class = "container">
+    <form method="post" th:action="@{/orga/edituebung/{id}(id = ${uebung.uebungId})}">
+    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" autocomplete="off" class="form-control" name="uebungname"
+               th:value="${uebung.uebungname}">
+    </div>
+    <div class="form-group">
+        <label>Startdatum</label>
+        <input type="text" autocomplete="off"
+               class="form-control" name="startdatum" th:value="${uebung.startDatum}">
+    </div>
+    <div class="form-group">
+        <label>Enddatum</label>
+        <input class="form-control" type="text" autocomplete="off" name="enddatum"
+               th:value="${uebung.endDatum}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Speichern</button>
+
+
+    <div class="col-sm">
+        <h3><a href="#" th:href="@{/tutor/termine/{id}(id = ${uebung.uebungId})}" th:text="${uebung.uebungname}">Name</a></h3>
+        <h4 th:text="${uebung.startDatum}"></h4>
+        <h4 th:text="${uebung.endDatum}"></h4>
+        <div th:if="${uebung.gruppenanmeldung}">
+            <p>Gruppenanmeldung wurde ausgewählt</p>
+        </div>
+        <div th:if="${uebung.individualanmeldung}">
+            <p>Individualanmeldung wurde ausgewählt</p>
+        </div>
+    </div>
+</form>
+</div>
+</body>
+</html>

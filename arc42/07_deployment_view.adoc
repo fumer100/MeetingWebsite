@@ -1,0 +1,5 @@
+== Verteilungssicht
+
+== Auf welcher Hardware werden die Bausteine betrieben?
+
+TODO fehlt

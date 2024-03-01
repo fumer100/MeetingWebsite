@@ -1,0 +1,48 @@
+== Randbedingungen
+
+== Welche Leitplanken schränken die Entwurfsentscheidungen ein?
+
+- wir haben keine Value Objects.
+
+
+
+
+- Wir haben folgende Checksyle-checks in der config.xml ausgeschaltet:
+* Alles mit Javadoc, weil redundante Kommentare gefordert waren
+* AvoidStarImport, weil die ganze Bibliothek benötigt wird -> übersichtlicher
+* Hiddenfields, führte zu unübersichtlichen Parameternamen im Konstruktor, weil man nicht die gleichen verwenden durfte
+* TodoComment, uns interessiert kein TodoComment-Format ;)
+* DesignForExtension, weil es Polymorphie erzwungen hat an Stellen an denen es keinen Sinn macht.(z.B. im Controller)
+
+
+- Suppressed Checks bei PMD (Präfix PMD. !) und Checkstyle (kein Präfix):
+
+* MagicNumber, da wir nicht alles als Konstanten definieren müssen was intuitiv/aus der Aufgabenstellung offensichtlich ist
+* FinalParameters, in der Controller-Klasse, da wir nicht alles final setzen wollen/können
+* "PMD.MethodArgumentCouldBeFinal", -||- (wie darüber)
+* PMD.LongVariable, lange Namen ließen sich hier nicht (sinnvoll) vermeiden, sodass die Qualität verbessert werden würde
+* PMD.BeanMembersShouldSerialize, u.a. Service Fix (und beim UebungRepository, möchte DataSource static transient machen)
+* PMD.AtLeastOneConstructor, "Every web service class does have a constructor. If you don't include one then Java automatically adds the default no-arg constructor for you." (redundant und auch nicht "sicherer")
+* PMD.AvoidLiteralsInIfCondition, gleiche wie bei MagicNumber (siehe Checkstyle Checks-Erklärung)
+* PMD.OnlyOneReturn, man könnte hier stattdessen conditional operators nutzen, jedoch fanden wir den Code so (nicht immer!) lesbarer. Da, wo ein ternärer Operator auch Sinn macht, wurde einer benutzt (siehe z.B. ZeitValidator).
+* PMD.SimplifyBooleanReturns, ähnlich wie bei OnlyOneReturn davor, hilft an den Stellen nicht bei der Lesbarkeit (ZeitValidator)
+* PMD.TooManyMethods, in ZeitValidator und für die Controller-Klasse
+* PMD.UseUtilityClass, "The main problem is that a class depending on a static method from a Utility Class has tight coupling. You are using a specific external dependency, not an abstraction. There is no way to switch that dependency under various circumstances. Usually, you would be able to provide a subclass of that dependency instead or another dependency implementing the interface. You lose that flexibility completely." und wenig OOP ... (für ZeitValidator)
+* PMD.CommentDefaultAccessModifier, an der Stelle (Repositories) einfach nicht gewollt
+* PMD.LiteralsFirstInComparisons, entspricht nicht unseren Coding Style ;)
+* PMD.PositionLiteralsFirstInComparisons, -||- (wie darüber)
+* PMD.DataflowAnomalyAnalysis, Deprecated
+* PMD.UseLocaleWithCaseConversions, Überprüfung nach "Locale Case" ist nicht notwendig (lokale Uhrzeitenformate)
+* PMD.UseConcurrentHashMap, wir benutzen kein Multithreading, daher keine ConcurrentHashMap notwendig
+* PMD.ConfusingTernary, auch wegen der Lesbarkeit
+* PMD.UseObjectForClearerAPI, Methoden müssen public im Controller sein
+* PMD.SingularField, wegen Autowired außerhalb der Methoden
+* PMD.LawOfDemeter, erkennt auch potentielle LOD-Verletzungen (z.B. lange Aufrufketten, die aber eigentlich gar nicht LOD verletzen (z.B. TerminService)
+* PMD.AvoidCatchingGenericException, brauchen wir im Controller, z.B. wenn Studierende hinzugefügt werden. Try/catch macht das in unseren Augen nur unübersichtlicher
+* PMD.SignatureDeclareThrowsException, -||- (wie darüber)
+* PMD.UseUnderscoresInNumericLiterals, fordert Punkte im dreier Intervall zu setzen, z.B. bei der appID in Repoerstellung (unnötig)
+* PMD.AvoidDuplicateLiterals, wir brauchen Secured("ROLE_ORGA") etc im Controller an mehreren Stellen
+* PMD.MissingStaticMethodInNonInstantiatableClass, beim UebungService, keine static Methoden, da wir die Klasse als Service einsetzen (muss dann auch nicht instanziert werden)
+* PMD.ModifiedCyclomaticComplexity, in der Individualanmeldung (zu) viele If-/Else-Abfragen
+* PMD.StdCyclomaticComplexity, ähnlich wie darüber
+* PMD.UnusedPrivateField, benötigt in UebungRepository

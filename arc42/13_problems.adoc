@@ -1,0 +1,10 @@
+== Probleme bei der Produktion des Codes
+
+- Koordinationsprobleme und falsche Herangehensweise an die Problemstellung in der ersten Woche -> Neustart am Freitag der ersten Woche
+- direkte Planung der Datenbank, wenig Fokus auf das Domain-Storytelling welches schon vorhanden war.
+- zudem zielloses Schreiben von Code und keine Planung von UI und einzelner Funktionalitäten
+- wir wollten bestehenden Code nicht verwerfen, was uns vom Planen der UI abgehalten hat.
+- keine bestimmte Wahl einer Architektur-> Umstrukturierungszwang Anfang zweiter Woche
+- nach dem "Neustart" haben wir begonnen die UI entsprechend der besprochenen Szenarien zu planen und zu entwickeln.
+- Die Wochen darauf waren eher weniger problematisch bis auf einige Github API und Docker Fehler die nach einiger Zeit behoben wurden.
+

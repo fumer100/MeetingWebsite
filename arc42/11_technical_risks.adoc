@@ -1,0 +1,7 @@
+== Risiken
+
+- Unkontrollierte Repository Erstellung
+- Kein Error-Handling bei den Dateneingaben
+- (noch) keine Uebernahme von Daten aus der DB moeglich (Uebungen etc.)
+- Laufzeitprobleme bei gleichzeitiger Erstellung von Gruppen und Anmeldungen
+- Trolling an manchen Stellen moeglich ( z.B. das direkte Einfuegen von Studenten in eine Gruppe)

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <title>Übersicht</title>
+    <style>
+        body {
+            padding-top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="container" th:if="${uebungen.empty}">
+        <h4>Noch keine Übung erstellt!</h4>
+        <div class="container" th:if="${orga}">
+            <a class="btn btn-primary" href="/orga/createuebung">Uebung erstellen</a>
+        </div>
+    </div>
+    <div class="col-sm" th:each="uebung : ${uebungen}">
+        <h3 th:if="${tutor || orga}"><a href="#" th:href="@{/tutor/termine/{id}(id = ${uebung.uebungId})}" th:text="${uebung.uebungname}">Name</a></h3>
+        <h3 th:if="${!tutor && !orga}"><p th:text="${uebung.uebungname}">Name</p></h3>
+        <h3 th:if="${tutor||orga}"><a href="#" th:href="@{/terminwahl/{id}(id = ${uebung.uebungId})}">Zur Anmeldung</a></h3>
+        <h4 th:text="${uebung.startDatum}"></h4>
+        <h4 th:text="${uebung.endDatum}"></h4>
+        <div th:if="${uebung.gruppenanmeldung}">
+            <p>Gruppenanmeldung wurde ausgewählt</p>
+        </div>
+        <div th:if="${uebung.individualanmeldung}">
+            <p>Individualanmeldung wurde ausgewählt</p>
+        </div>
+        <form th:if="${orga}" method="get" th:action="@{/orga/createuebung}" style="display:inline!important;">
+            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+            <button class="delete" type="submit">Uebung erstellen</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

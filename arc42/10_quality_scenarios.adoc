@@ -1,0 +1,24 @@
+== Qualitätsszenarien
+
+== Qualitätsbaum sowie dessen Konkretisierung durch Szenarien
+
+* (Security)
+- Rollen spezifische Zugriffsmoeglichkeiten auf verschiedene Funktionen
+- Informationszugriffe auf Informationen von Usern eingeschraenkt
+(Organisatoren und Tutoren koennen alle Gruppen einer Uebung sehen, Studenten nicht.)...
+
+* (Functional Suitability)
+- Funktionalitaeten funktionieren so wie erwartet, bis auf kleine features.
+(Anmeldungsmodi funktionieren)...
+
+* (Reliability)
+- Bearbeitung von Uebungen, Terminen und Gruppen funktioniert zuverlaessig
+- Die Anmeldungsmodi funktionieren zuverlaessig
+- Speicherung von Uebungen, Terminen und Gruppen ist persistent
+(Student meldet sich zu einem Termin an -> Datenbank speichert Uebung zu Termin und Student zu Uebung)
+
+* (Maintainability)
+- Trennung von Funktionalitaeten in verschiedene Klassen
+- Teile nutzbar fuer verschiedene Anwendungsbereiche mit einem Termin System
+(Algorithmus der Teilung in moeglichst gleich große und genuegend große Gruppen)
+

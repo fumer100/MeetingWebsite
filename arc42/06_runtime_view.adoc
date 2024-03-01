@@ -1,0 +1,61 @@
+== Laufzeitsicht
+
+Gruppenanmeldung aus Sicht von Organisatoren:
+
+* (Baustein Eingabe:)
+- Organisator meldet sich mit GitHub Benutzerkennung an
+- kann Uebungen erstellen -> legt dabei Uebungsnamen, Start-&Enddatum, Gruppenmodus, Min/Max Gruppengroesse fest
+- Termine und Tutoren der jeweiligen Termine werden ueber CSV eingelesen
+
+* (Subsystem Uebungserstellung)
+- nach dem Festlegen der oben genannten Informationen ueber die Uebung wird die Uebung nach dem Erstellen fuer die Studierenden
+freigeschalten
+- Eingabe -> Uebungerstellung: die Uebung haengt von den jeweiligen Eingaben ab
+
+* (Subsystem Termine)
+- wie oben schon erwaehnt, werden Termine eingelesen und gehoeren genau zu einer Uebung (deshalb Termine -> Uebungserstellung)
+ => Termine koennen nicht ohne die Uebung existieren
+
+* (Subsystem Tutoren)
+- Eingabe -> Tutoren, da bei der Erstellung der Uebung die CSV fuer die Termine eingelesen wird und die verfuegbaren Termine
+von den Tutoren abhaengig sind
+- Termine -> Tutoren, s. Eingabe -> Tutoren
+
+* (Subsystem Repositories)
+- Repositories -> Termine, da die Repos erst nach dem Setzen des Gruppennamens durch einen Studierenden erstellt wird
+- Repositories -> Anmeldung, da die Studierenden, die sich fuer einen Termin anmelden in das jeweilige Repository eingefuegt
+werden
+
+* (Subsystem Anmeldung)
+- bei der Anmeldung kann man sich nur in Gruppen anmelden, die noch nicht voll sind
+
+* (Subsystem endgültiger Plan)
+- Anmeldung -> Endgültiger Plan, da die Anmeldungen bestimmen, wie die Besetzung der Termine am Ende aussieht
+- Uebungserstellung -> Endgültiger Plan, da die Eingaben von den Parametern der Uebung auch ein Bestandteil vom endgültigen Plan ist
+
+* (Subsystem Tutoren)
+- Tutoren koennen nachschauen, wer zu welchem Termin angemeldet ist (dementsprechend auch wen sie betreuen werden)
+
+* (Datenbank)
+- Endgültiger Plan -> Datenbank, da der Plan persistent in einer Datenbank gespeichert wird endgültiger Plan
+
+* (Gruppenanmeldung)
+- Siehe 04_solution_strategy.adoc
+- Anmeldung der Studierenden ueber Github (muss dafür eingeloggt sein)
+- Uebersicht der freien Termine: Terminwahl
+- In Terminwahl koennen Studierende sich selbst und ihre Gruppe anmelden und legen dabei zusaetzlich den Gruppennamen fest
+- Termin ist reserviert(Gruppe wurde erstellt zu dem Zeitslot)
+- Falls sich jemand noch nicht zur zuvor erstellten Gruppe angemeldet hat, kann er dies ueber Terminwahl nachholen. Dort wird angezeigt welche Gruppen zu welchem Zeitslot erstellt wurden und ob sie noch beitretbar sind(keine verlinkung zur Anmeldung sichtbar).
+- Sobald der Gruppenname gesetzt ist, wird ein Github Repo mit dem selben Namen erstellt und die angemeldeten Studierenden werden in die Repos eingefuegt
+
+* (Gruppenanmeldung Organisatoren)
+- Erstellt Uebung und lädt Termine per CSV hoch (Termine sind direkt beitretbar)
+- Die Uebungen sind auf derselben Seite editierbar und löschbar
+- In Termine bekommen die Organisatoren/Tutoren eine Uebersicht an angemeldeten Gruppen zu der jeweiligen Uebung. Zudem Infos ueber die Anzahl der Mitglieder.Tutoren koennen sehen welche Gruppe sie betreuen werden.
+- Organisatoren können diese Gruppen editieren (Studenten hinzufuegen entfernen nach Belieben)
+
+* (Individualanmeldung)
+- Studierende melden sich zu einem gewuenschten Zeitslot an.
+- Tutoren werden bei CSV einlesung zufaellig auf Zeitslots zugeteilt
+- Organisator teilt per Button in Termine die angemeldeten Studenten in zufaellige und "passende" Gruppen ein
+- Repositories werden zu jeder Gruppe erstellt

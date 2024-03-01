@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Demo</title>
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+ <div class="container" th:if="${uebung.gruppenanmeldung}">
+    <h1 class="siteTitel" th:text="${uebung.uebungname}">Praktische Übung 9</h1>
+     <h3 th:text="${termin.tag}">MO</h3>
+     <h3 th:text="${termin.datum}">12.11.2020</h3>
+     <h3 th:text="${termin.uhrzeit}">12:30</h3>
+     <span th:text="${termin.gruppenname != null} ? ${termin.gruppenname} : 'noch nicht belegt'">someValue</span>
+
+     <div th:if = "${termin.gruppenname == null}">
+     <form for ="erstellen" action="" method="post" >
+         <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+         <div class="form-group">
+             <label>Gruppenname</label>
+             <input type="text" autocomplete="off" class="form-control" name="gruppenname">
+         </div>
+         <button class="btn btn-outline-primary" type="submit">Erstellen</button>
+     </form>
+     </div>
+
+     <div th:if = "${termin.gruppenname != null}">
+         <form for ="erstellen" action="" method="post" >
+             <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+             <div class="form-group">
+                 <label>Benutzername</label>
+                 <input type="text" autocomplete="off" class="form-control" name="studierende">
+             </div>
+             <div class="col-sm" th:each="studierende : ${termin.gruppe}">
+                 <h3 th:text="${studierende}">Benutzername</h3>
+             </div>
+             <button class="btn btn-outline-primary" type="submit">Hinzufügen</button>
+         </form>
+     </div>
+</div>
+
+
+     <div class="container" th:if="${uebung.individualanmeldung}">
+     <h1 class="siteTitel" th:text="${uebung.uebungname}">Praktische Übung 9</h1>
+         <div>
+             <form method="post" th:action="@{/addstudierendeindividual/{uebungId}/{individualId}(uebungId = ${uebung.uebungId},individualId=${individualanmeldung.individualId})}" style="display:inline!important;">
+                 <input type="text" autocomplete="off" class="form-control" name="studierende">
+                 <button class="btn btn-outline-primary" type="submit">Einfügen</button>
+             </form>
+         </div>
+ </div>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+== Kontextabgrenzung
+
+== In welchem fachlichen und/oder technischen Umfeld arbeitet das System?
+
+Das System arbeitet im universellen Kontext. Interagierende Benutzergruppen haben unterschiedliche Privelegien.
+
+* Anmeldung durch GitHub API -> erst dann ist die Anmeldung fuer die jeweiligen Uebungstermine moeglich
+* Hauptsystem: Uebungssystem
+    - Hauptaufgabe des Uebungssystems: i.A. fuer Uebungserstellung und -anmeldung zustaendig
+
+Folgende drei Rollen interagieren mit dem System:
+
+    * Organisatoren:
+        - erstellen Uebungen, sind fuer die Verwaltung zustaendig (Erstellen, Aendern und Loeschen der Uebungen)
+        - lesen Termine per CSV ein (Beispiel fuer Aufbau einer CSV siehe test.csv) und sind fuer dessen Verwaltung
+        zustaendig (Editieren der Gruppen innerhalb eines Termins, Zuteilung der Studierenden fuer Individualanmeldungen)
+        - haben Zugriff auf alles
+
+    * Tutoren:
+        - koennen die Termine (mit den jeweiligen Tutoren) und die angemeldeten Gruppen (und Studierende) sehen
+        - koennen keine Aenderungen durchfuehren
+
+    * Studierende:
+        - koennen sich mithilfe ihrer GitHub Benutzernamen einloggen und sich (und evtl deren Gruppe bei Gruppenanmeldung)
+        fuer ein Termin ihrer Wahl anmelden
+        - legen einen Gruppennamen fest
+        - werden nach der Anmeldung auch in ein passendes Repository hinzugefuegt
+
+Außerdem erlaubt die Datenbank eine persistente Speicherung der Studierenden, der Termine, der Uebungen und die
+Zugehoerigkeit von Termin&Uebung (zu welcher Uebung gehoert ein Termin) und Termin&Studierenden (zu welchem Termin/
+welcher Gruppe gehoert ein Student).
+
+Ein weiterer wichtiger Teil des Systems ist GitHub (Fremdsystem). Erst durch das Einloggen werden die oben genannten moeglich.

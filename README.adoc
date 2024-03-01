@@ -1,0 +1,107 @@
+= Softwareentwicklung im Team: Praktikum
+:icons: font
+:icon-set: fa
+:source-highlighter: rouge
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+:stem: latexmath
+endif::[]
+
+
+== arc42_template
+include::arc42/00_arcdoc_template.adoc[]
+
+== Einführung und Ziele
+include::arc42/01_introduction_and_goals.adoc[]
+
+== Randbedingungen
+include::arc42/02_architecture_constraints.adoc[]
+
+== Kontextabgrenzung
+include::arc42/03_system_scope_and_context.adoc[]
+
+== Lösungsstrategie
+include::arc42/04_solution_strategy.adoc[]
+
+== Bausteinsicht
+include::arc42/05_building_block_view.adoc[]
+
+== Laufzeitsicht
+include::arc42/06_runtime_view.adoc[]
+
+== Verteilungssicht
+include::arc42/07_deployment_view.adoc[]
+
+== Querschnittliche Konzepte und Muster
+include::arc42/08_concepts.adoc[]
+
+== Entwurfsentscheidungen
+include::arc42/09_design_decisions.adoc[]
+
+== Qualitätsszenarien
+include::arc42/10_quality_scenarios.adoc[]
+
+== Risiken
+include::arc42/11_technical_risks.adoc[]
+
+== Glossar
+include::arc42/12_glossary.adoc[]
+
+== Probleme
+include::arc42/13_problems.adoc[]
+
+
+== Anleitung
+
+* Organisatoren (Uebungserstellung):
+- nach Einloggen Weiterleitung auf die Uebersicht auf der am Anfang "noch keine Uebung erstellt" steht
+- die noetigen Informationen eintragen (Uebungsname, Start-/Enddatum im DD.MM.YYYY Format, Minimal-/Maximalanzahl
+an Studierenden pro Gruppe, Anmeldungsmodus)
+- per CSV die Termine einlesen (fuer Aufbau der CSV siehe test.csv unter anmeldung-zum-praktikum-meister-propra-4)
+- Uebung erstellen
+
+* Organisatoren (Bearbeiten der Uebungen):
+- um Uebungen zu bearbeiten, muss der "Uebung bearbeiten" Button auf /orga/createuebung gedrueckt werden
+- die eingegebenen Parameter koennen hier (nur durch Organisatoren) beliebig veraendert werden
+- Aenderungen speichern
+
+* Organisatoren (Loeschen der Uebungen):
+- um Uebungen zu loeschen, muss der "Uebung loeschen" Button auf /orga/createuebung gedrueckt werden
+- sobald eine Uebung geloescht ist, werden auch die zugehoerigen Termine und die angemeldeteten Studierenden aus der Datenbank
+entfernt
+
+* Organisatoren (Aendern einer Gruppe):
+- auch die Gruppen/Termine koennen beliebig veraendert und angepasst werden (/orga/editgruppe)
+
+* Organisatoren/Tutoren (Termine sehen/Zuteilung):
+- /tutor/termine erlaubt den Tutoren und Organisatoren Informationen ueber die Termine zu sehen
+- dabei wird angezeigt, welche Termine belegt sind, welche voll sind, welche genug Mitglieder haben, wie viele
+Mitglieder eine Gruppe hat und im Fall einer Gruppenanmeldung werden auch die Gruppennamen angezeigt
+- zusaetzlich wird angezeigt welcher Tutor welche Uebung uebernimmt (dabei wurde die Tutorenzuteilung randomisiert)
+- bei einer Individualanmeldung muss der Organisator auf /tutor/termine auf den Zuteilungsbutton klicken, damit die
+Gruppenzuteilung stattfinden kann (dieser Button ist nicht fuer Tutoren sichtbar)
+
+
+* Studierende (Anmeldung):
+- eingeloggte Studierende sehen ueber /terminwahl, welche Termine zur Verfuegung stehen
+- sie koennen sich je nach Anmeldungsmodus fuer einen Termin anmelden
+- Gruppenanmeldung:
+    1. ein/e Studierende waehlt einen Termin aus und gibt den Gruppennamen an
+    2. Studierende meldet sich selbst in der Gruppe an, indem er seine GitHub Kennung eingibt
+    3. zusaetzlich meldet er seine Gruppenmitglieder an
+    4. falls die Anzahl der Gruppenmitglieder unter der Maximalanzahl pro Gruppe liegt, koennen sich weitere Studierende
+    fuer diesen Termin anmelden
+    5. Repository wird erstellt und die Gruppenmitglieder sind angemeldet
+- Individualanmeldung:
+    1. Studierende suchen sich den gewuenschten Zeitslot aus und melden sich mit ihren GitHub Benutzernamen an
+    2. nachdem die Zuteilung durch das Orga-Team stattgefunden hat, werden sie einer Gruppe zugeteilt und werden in das jeweilige
+    Repository hinzugefuegt
+
+* Tutoren:
+- werden zufaellig einem Termin mit ihrem Zeitslot zugeteilt
+- koennen sehen, wen sie betreuen werden (/tutor/termine)
